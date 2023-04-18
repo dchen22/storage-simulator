@@ -1,6 +1,6 @@
 import pytest
 from item import *
-
+from WTF import WTF
 
 def test_check_negative_count():
     item1 = Item('apple', 5)

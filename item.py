@@ -1,4 +1,5 @@
 from typing import Annotated
+from WTF import *
 
 
 class Item:
@@ -23,9 +24,9 @@ class Item:
     def count(self, new_count: int):
         """ Setter for <_count> """
         if not isinstance(new_count, int):
-            raise TypeError
+            raise TypeError('Item.count is set to non-integer')
         if new_count < 0:
-            raise ValueError
+            raise ValueError('Item.count is set to negative')
         self._count = new_count
 
     def can_take(self, num: int) -> bool:
@@ -43,8 +44,14 @@ class Item:
         try:
             self.count -= num
             return True
-        except ValueError:
-            return False
-        except TypeError:
-            raise TypeError('Value must be an integer')
+        except ValueError as err:
+            if str(err) == 'Item.count is set to negative':
+                return False
+            else:
+                raise WTF
+        except TypeError as err:
+            if str(err) == 'Item.count is set to non-integer':
+                raise TypeError('Value must be an integer')
+            else:
+                raise WTF
 
