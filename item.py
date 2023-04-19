@@ -76,7 +76,7 @@ class ItemStack:
 
     def get_count(self) -> int:
         """ Return this number of items in this stack """
-
+        return self._count
 
 class BasicItemErrors(Exception):
     pass
